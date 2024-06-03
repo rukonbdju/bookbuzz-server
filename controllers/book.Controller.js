@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { database } = require("../config/db")
 
 module.exports.postBook= async (req,res) =>{
@@ -23,7 +24,10 @@ module.exports.getAllBooks= async (req,res) =>{
 }
 module.exports.getBookById= async (req,res) =>{
     try{
-
+        console.log(req.params)
+        const id=req.params.id;
+        const result=await database.collection('books').findOne({ _id: new ObjectId(id) })
+        res.send(result)
     }catch(error){
         console.log(error)
     }finally{
