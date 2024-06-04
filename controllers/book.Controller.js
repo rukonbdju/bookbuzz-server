@@ -45,7 +45,11 @@ module.exports.updateBookById= async (req,res) =>{
 }
 module.exports.deleteBookById= async (req,res) =>{
     try{
-
+        const id=req.params.id
+        console.log(id)
+        const result=database.collection('books').deleteOne({_id:new ObjectId(id)})
+        res.send(result)
+        console.log(result)
     }catch(error){
         console.log(error)
     }finally{

@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllBooks, postBook, getBookById } = require('../controllers/book.Controller')
+const { getAllBooks, postBook, getBookById, deleteBookById } = require('../controllers/book.Controller')
 
 const bookRouter = express.Router()
 
@@ -8,5 +8,7 @@ bookRouter.route("/")
     .post(postBook)
 bookRouter.route("/:id")
     .get(getBookById)
+bookRouter.route("/delete/:id")
+    .post(deleteBookById)
 
 module.exports = bookRouter
