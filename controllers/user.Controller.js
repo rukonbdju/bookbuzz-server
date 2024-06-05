@@ -31,6 +31,9 @@ module.exports.getAllUsers = async (req, res) => {
 }
 module.exports.getUserById = async (req, res) => {
     try {
+        const {id}=req.params
+        const result = await database.collection('users').findOne({uid:id})
+        res.send(result)
 
     } catch (error) {
         console.log(error)
@@ -41,7 +44,10 @@ module.exports.getUserById = async (req, res) => {
 }
 module.exports.UpdateUserById = async (req, res) => {
     try {
-
+        const {id}=req.params
+        const userInfo=req.body
+        const result = await database.collection('users').updateOne({uid:id},{$set:userInfo})
+        res.send(result)
     } catch (error) {
         console.log(error)
     } finally {

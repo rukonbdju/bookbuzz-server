@@ -2,9 +2,8 @@ const { ObjectId } = require("mongodb");
 const { database } = require("../config/db")
 
 module.exports.postBook= async (req,res) =>{
-    
     try{
-        const result = await database.collection('books').insertMany(req.body);
+        const result = await database.collection('books').insertOne(req.body);
         res.send(result)
     }catch(error){
         console.log(error)
@@ -36,7 +35,11 @@ module.exports.getBookById= async (req,res) =>{
 }
 module.exports.updateBookById= async (req,res) =>{
     try{
-
+        const {id}=req.params
+        const bookInfo=req.body
+        console.log(bookInfo)
+        const result = await database.collection('books').updateOne({_id:new ObjectId(id)},{$set:bookInfo})
+        res.send(result)
     }catch(error){
         console.log(error)
     }finally{
